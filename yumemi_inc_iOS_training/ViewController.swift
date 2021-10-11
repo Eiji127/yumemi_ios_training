@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import YumemiWeather
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     // MARK: - Properties
     
@@ -24,9 +25,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        updateWeather()
     }
-
-
+    
+    // MARK: - Handlers
+    
+    @IBAction func reloadWeather(_ sender: Any) {
+        updateWeather()
+    }
+    
+    // MARK: - Helpers
+    
+    private func updateWeather() {
+        let weather = YumemiWeather.fetchWeather()
+        setWeatherImage(name: "\(weather)")
+    }
+    
+    private func setWeatherImage(name: String) {
+        weatherImageView.image = UIImage(named: name)
+    }
 }
 
